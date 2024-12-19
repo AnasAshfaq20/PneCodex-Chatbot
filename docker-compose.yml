@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  frontend:
+    build:
+      context: ./frontend  # Path to your frontend folder
+    ports:
+      - "80:80"  # Expose frontend on port 80
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend  # Path to your backend folder
+    ports:
+      - "8000:8000"  # Expose backend on port 8000
+    env_file:
+      - ./backend/.env  # Use .env for environment variables
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
